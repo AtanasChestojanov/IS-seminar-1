@@ -6,6 +6,18 @@ import numpy as np
 import pygad
 
 
+# def extract_data(file_path):
+#     ds = pd.read_json(file_path)
+#     # display(ds)
+#     preferences = np.array([list(row) for row in ds["preferences"]])
+#     friendships = np.array([list(row) for row in ds["friendships"]])
+#     authorship = np.array([list(row) for row in ds["authorship"]])
+#     capacity = ds["reviewer_capacity"][0]
+#     min_reviews = ds["min_reviews_per_paper"][0]
+#     max_reviews = ds["max_reviews_per_paper"][0]
+    
+#     return  preferences, friendships, authorship, capacity, min_reviews, max_reviews
+
 def extract_data(file_path):
     ds = pd.read_json(file_path)
     # display(ds)
