@@ -9,11 +9,17 @@ import pygad
 def extract_data(file_path):
     ds = pd.read_json(file_path)
     # display(ds)
+    global preferences 
     preferences = np.array([list(row) for row in ds["preferences"]])
+    global friendships
     friendships = np.array([list(row) for row in ds["friendships"]])
+    global authorship
     authorship = np.array([list(row) for row in ds["authorship"]])
+    global capacity
     capacity = ds["reviewer_capacity"][0]
+    global min_reviews
     min_reviews = ds["min_reviews_per_paper"][0]
+    global max_reviews
     max_reviews = ds["max_reviews_per_paper"][0]
     
     return  preferences, friendships, authorship, capacity, min_reviews, max_reviews
@@ -544,7 +550,7 @@ def custom_crossover_heuristic(parents, offspring_size, ga_instance):
     offspring = np.empty(offspring_size, dtype=parents.dtype)
 
     # Fitness values for the parents
-    parent_fitness = np.array([ga_instance.fitness_func(p, ga_instance) for p in parents])
+    parent_fitness = np.array([fitness_function_impl(p.reshape((authorship.shape)), preferences,capacity,min_reviews,max_reviews,friendships,authorship) for p in parents])
 
     for child_index in range(offspring_size[0]):
         # Select two parents
